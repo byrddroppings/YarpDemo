@@ -1,0 +1,24 @@
+﻿services:
+  service1:
+    image: service1
+    build:
+      context: .
+      dockerfile: Service1/Dockerfile
+  service2:
+    image: service2
+    build:
+      context: .
+      dockerfile: Service2/Dockerfile
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - INSTANCE=1
+  yarpproxy:
+    image: yarpproxy
+    build:
+      context: .
+      dockerfile: YARPProxy1/Dockerfile
+    ports:
+      - "80:80"
+    depends_on: [service1, service2]
+    
+    
